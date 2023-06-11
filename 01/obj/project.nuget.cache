@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "tEvqvsmLrhpWySr677KOLR6a5DecSZvPGlqDGDaX8DGgSlJniSYowoPnxBYuRd2or43IkK8ohstQ4df7LaClYA==",
+  "success": true,
+  "projectFilePath": "/Users/samueldubovec/fsharp/advent_of_code_2022/01/01.fsproj",
+  "expectedPackageFiles": [
+    "/Users/samueldubovec/.nuget/packages/fsharp.core/7.0.300/fsharp.core.7.0.300.nupkg.sha512"
+  ],
+  "logs": []
+}
