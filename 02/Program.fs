@@ -27,7 +27,7 @@ let getExpectedResultValue value =
     | "Z" -> Win
     | _   -> raise (Exception "Incorrect result input")
     
-let getPlayersChoiceScore choice =
+let calculatePlayersChoiceScore choice =
     match choice with
     | Rock -> 1
     | Paper -> 2
@@ -38,7 +38,7 @@ let getMoveResult opponentsChoice playersChoice =
     | Rock, Scissors | Paper, Rock | Scissors, Paper -> Win
     | o, p -> if o = p then Draw else Loss
     
-let getMoveResult2 (opponentsChoice, expectedResult) =
+let getMoveChoices (opponentsChoice, expectedResult) =
     match (opponentsChoice, expectedResult) with
     | Rock, Loss     -> Rock, Scissors
     | Rock, Win      -> Rock, Paper
@@ -48,15 +48,15 @@ let getMoveResult2 (opponentsChoice, expectedResult) =
     | Scissors, Loss -> Scissors, Paper
     | x, _           -> x, x
     
-let getMoveScore result =
+let calculateMoveScore result =
     match result with
     | Win  -> 6
     | Draw -> 3
     | Loss -> 0
     
-let getChoiceScore (opponentsChoice, playersChoice) =
-    let playerChoiceScore = getPlayersChoiceScore playersChoice
-    let moveScore = getMoveScore (getMoveResult opponentsChoice playersChoice)
+let calculateChoiceScore (opponentsChoice, playersChoice) =
+    let playerChoiceScore = calculatePlayersChoiceScore playersChoice
+    let moveScore = calculateMoveScore (getMoveResult opponentsChoice playersChoice)
     
     moveScore + playerChoiceScore
 
@@ -70,18 +70,16 @@ let question1 fileName =
     let parsedInput = parseInput fileName getChoiceValue
     
     parsedInput
-    |> Seq.map getChoiceScore
+    |> Seq.map calculateChoiceScore
     |> Seq.sum
-    
-    
+       
 let question2 fileName =
      let parsedInput = parseInput fileName getExpectedResultValue
      
      parsedInput
-     |> Seq.map getMoveResult2
-     |> Seq.map getChoiceScore
+     |> Seq.map getMoveChoices
+     |> Seq.map calculateChoiceScore
      |> Seq.sum
-   
     
 let result1 = question1 "input.txt"
 printfn $"{result1}"
